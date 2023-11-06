@@ -1,0 +1,9 @@
+{
+    "Name": "Robot Framework",
+    "Test": "Automation",
+    "City": ["City1","City2","City3"],
+    "Number": {
+        "Mobile": "5748574565",
+        "Telephone": "2836576768"
+    }
+}
