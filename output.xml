@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.12.0 on win32)" generated="20231105 00:47:31.901" rpa="false" schemaversion="4">
+<suite id="s1" name="DELETE" source="D:\Users\Public\Downloads\RobotFrameworkDemo\TestCases\DELETE.robot">
+<test id="s1-t1" name="Delete Request Demo" line="13">
+<kw name="create">
+<arg>session</arg>
+<arg>session1</arg>
+<arg>${base_url}</arg>
+<arg>disable_warnings=1</arg>
+<msg timestamp="20231105 00:47:32.245" level="FAIL">No keyword with name 'create' found. Did you mean:
+    BuiltIn.Create List</msg>
+<status status="FAIL" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${endpoint}</var>
+<arg>posts/1</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+</kw>
+<kw name="DELETE On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>session1</arg>
+<arg>${endpoint}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+</kw>
+<tag>Demo1</tag>
+<status status="FAIL" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245">No keyword with name 'create' found. Did you mean:
+    BuiltIn.Create List</status>
+</test>
+<status status="FAIL" starttime="20231105 00:47:31.901" endtime="20231105 00:47:32.245"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">Demo1</stat>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="DELETE">DELETE</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

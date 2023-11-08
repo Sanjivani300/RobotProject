@@ -4,11 +4,20 @@
 *** Settings ***
 Documentation    Read Data From JSON file using Robot Framework
 ...     Library Documenation : https://robotframework-thailand.github.io/robotframework-jsonlibrary/JSONLibrary.html
-Library    JSONLibrary
+Library     JSONLibrary
 
 
 
 *** Test Cases ***
+Convert String Output to JSON
+    ${string_output}=    Set Variable    {"Name": "Robot Framework", "Test": "Automation", "City": ["City1", "City2", "City3"], "Number": {"Mobile": "5748574565", "Telephone": "2836576768"}}
+
+    # Convert string content to JSON
+    ${json_content}=    Evaluate    json.loads('''${string_output}''')    json
+
+    # Log JSON content to console
+    Log To Console    ${json_content}
+
 Get Data Name From Json File
      ${file}     load json from file    ${CURDIR}${/}jsonFile.json
 
