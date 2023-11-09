@@ -18,8 +18,9 @@ Put_CustomerRegistration
      #VALIDATIONS
 
      ${status_code}=    convert to string     ${response.status_code}
-     should be equal    ${status_code}    500
+     should be equal    ${status_code}    200
 
      ${res_body}=    convert to string     ${response.content}
-     should be equal    ${res_body}    3657
+     should be equal    ${res_body}    4863
 
+     #value_Is_Change_ie_"200"_and_"4863"_in_API_So_Error

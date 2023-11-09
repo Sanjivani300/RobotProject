@@ -1,66 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.1.1 (Python 3.12.0 on win32)" generated="20231105 00:47:31.901" rpa="false" schemaversion="4">
-<suite id="s1" name="DELETE" source="D:\Users\Public\Downloads\RobotFrameworkDemo\TestCases\DELETE.robot">
-<test id="s1-t1" name="Delete Request Demo" line="13">
-<kw name="create">
-<arg>session</arg>
-<arg>session1</arg>
-<arg>${base_url}</arg>
-<arg>disable_warnings=1</arg>
-<msg timestamp="20231105 00:47:32.245" level="FAIL">No keyword with name 'create' found. Did you mean:
-    BuiltIn.Create List</msg>
-<status status="FAIL" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
-</kw>
+<robot generator="Robot 6.1.1 (Python 3.12.0 on win32)" generated="20231108 00:55:27.199" rpa="false" schemaversion="4">
+<suite id="s1" name="Json" source="D:\Users\Public\Downloads\RobotFrameworkDemo\TestCases\json.robot">
+<test id="s1-t1" name="Convert String Output to JSON" line="12">
 <kw name="Set Variable" library="BuiltIn">
-<var>${endpoint}</var>
-<arg>posts/1</arg>
+<var>${string_output}</var>
+<arg>{"Name": "Robot Framework", "Test": "Automation", "City": ["City1", "City2", "City3"], "Number": {"Mobile": "5748574565", "Telephone": "2836576768"}}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+<msg timestamp="20231108 00:55:27.558" level="INFO">${string_output} = {"Name": "Robot Framework", "Test": "Automation", "City": ["City1", "City2", "City3"], "Number": {"Mobile": "5748574565", "Telephone": "2836576768"}}</msg>
+<status status="PASS" starttime="20231108 00:55:27.558" endtime="20231108 00:55:27.558"/>
 </kw>
-<kw name="DELETE On Session" library="RequestsLibrary">
-<var>${response}</var>
-<arg>session1</arg>
-<arg>${endpoint}</arg>
-<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
-</kw>
-<kw name="Log To Console" library="BuiltIn">
-<arg>${response.status_code}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+<kw name="Evaluate" library="BuiltIn">
+<var>${json_content}</var>
+<arg>json.loads('''${string_output}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20231108 00:55:27.558" level="INFO">${json_content} = {'Name': 'Robot Framework', 'Test': 'Automation', 'City': ['City1', 'City2', 'City3'], 'Number': {'Mobile': '5748574565', 'Telephone': '2836576768'}}</msg>
+<status status="PASS" starttime="20231108 00:55:27.558" endtime="20231108 00:55:27.558"/>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
-<arg>${response.content}</arg>
+<arg>${json_content}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+<status status="PASS" starttime="20231108 00:55:27.558" endtime="20231108 00:55:27.558"/>
 </kw>
-<kw name="Convert To String" library="BuiltIn">
-<var>${status_code}</var>
-<arg>${response.status_code}</arg>
-<doc>Converts the given item to a Unicode string.</doc>
-<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+<status status="PASS" starttime="20231108 00:55:27.558" endtime="20231108 00:55:27.558"/>
+</test>
+<test id="s1-t2" name="Get Data Name From Json File" line="21">
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${file}</var>
+<arg>D:\\Users\\Public\\Downloads\\RobotFrameworkDemo\\TestCases${/}jsonFile.json</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20231108 00:55:27.558" level="INFO">${file} = {'Name': 'Robot Framework', 'Test': 'Automation', 'City': ['City1', 'City2', 'City3'], 'Number': {'Mobile': '5748574565', 'Telephone': '2836576768'}}</msg>
+<status status="PASS" starttime="20231108 00:55:27.558" endtime="20231108 00:55:27.558"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${json_name}</var>
+<arg>${file}</arg>
+<arg>$.Name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231108 00:55:27.605" level="INFO">${json_name} = ['Robot Framework']</msg>
+<status status="PASS" starttime="20231108 00:55:27.558" endtime="20231108 00:55:27.605"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Value name is ${json_name[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231108 00:55:27.605" endtime="20231108 00:55:27.605"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${json_test}</var>
+<arg>${file}</arg>
+<arg>$.Test</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231108 00:55:27.636" level="INFO">${json_test} = ['Automation']</msg>
+<status status="PASS" starttime="20231108 00:55:27.605" endtime="20231108 00:55:27.636"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Value test is ${json_test[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231108 00:55:27.652" endtime="20231108 00:55:27.652"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${json_city}</var>
+<arg>${file}</arg>
+<arg>$.City</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231108 00:55:27.683" level="INFO">${json_city} = [['City1', 'City2', 'City3']]</msg>
+<status status="PASS" starttime="20231108 00:55:27.652" endtime="20231108 00:55:27.683"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Value cities is ${json_city[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231108 00:55:27.683" endtime="20231108 00:55:27.683"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${json_city}</var>
+<arg>${file}</arg>
+<arg>$.City[0]</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231108 00:55:27.715" level="INFO">${json_city} = ['City1']</msg>
+<status status="PASS" starttime="20231108 00:55:27.683" endtime="20231108 00:55:27.715"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Value cities is ${json_city[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231108 00:55:27.715" endtime="20231108 00:55:27.715"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${json_city[0]}</arg>
+<arg>City1</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231108 00:55:27.715" endtime="20231108 00:55:27.715"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${json_number}</var>
+<arg>${file}</arg>
+<arg>$.Number</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231108 00:55:27.746" level="INFO">${json_number} = [{'Mobile': '5748574565', 'Telephone': '2836576768'}]</msg>
+<status status="PASS" starttime="20231108 00:55:27.715" endtime="20231108 00:55:27.746"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>get all Numbers ${json_number[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231108 00:55:27.746" endtime="20231108 00:55:27.746"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${json_mobile}</var>
+<arg>${file}</arg>
+<arg>$.Number.Mobile</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231108 00:55:27.777" level="INFO">${json_mobile} = ['5748574565']</msg>
+<status status="PASS" starttime="20231108 00:55:27.746" endtime="20231108 00:55:27.777"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Mobile only ${json_mobile[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231108 00:55:27.777" endtime="20231108 00:55:27.777"/>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
-<arg>${status_code}</arg>
-<arg>200</arg>
+<arg>${json_mobile[0]}</arg>
+<arg>5748574565</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245"/>
+<status status="PASS" starttime="20231108 00:55:27.777" endtime="20231108 00:55:27.777"/>
 </kw>
-<tag>Demo1</tag>
-<status status="FAIL" starttime="20231105 00:47:32.245" endtime="20231105 00:47:32.245">No keyword with name 'create' found. Did you mean:
-    BuiltIn.Create List</status>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${json_tel}</var>
+<arg>${file}</arg>
+<arg>$.Number.Telephone</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231108 00:55:27.808" level="INFO">${json_tel} = ['2836576768']</msg>
+<status status="PASS" starttime="20231108 00:55:27.777" endtime="20231108 00:55:27.808"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Telephone only ${json_tel[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231108 00:55:27.808" endtime="20231108 00:55:27.808"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${json_tel[0]}</arg>
+<arg>2836576768</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20231108 00:55:27.808" endtime="20231108 00:55:27.808"/>
+</kw>
+<status status="PASS" starttime="20231108 00:55:27.558" endtime="20231108 00:55:27.808"/>
 </test>
-<status status="FAIL" starttime="20231105 00:47:31.901" endtime="20231105 00:47:32.245"/>
+<doc>Read Data From JSON file using Robot Framework
+Library Documenation : https://robotframework-thailand.github.io/robotframework-jsonlibrary/JSONLibrary.html</doc>
+<status status="PASS" starttime="20231108 00:55:27.214" endtime="20231108 00:55:27.808"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1" skip="0">All Tests</stat>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="0" fail="1" skip="0">Demo1</stat>
 </tag>
 <suite>
-<stat pass="0" fail="1" skip="0" id="s1" name="DELETE">DELETE</stat>
+<stat pass="2" fail="0" skip="0" id="s1" name="Json">Json</stat>
 </suite>
 </statistics>
 <errors>

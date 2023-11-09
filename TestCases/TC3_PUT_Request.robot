@@ -45,3 +45,6 @@ Put Request Demo
      ${status_code}=    convert to string     ${response.status_code}
      should be equal    ${status_code}    200
 
+   # ERROR ??
+   # 1 Pass, 1 Fail
+

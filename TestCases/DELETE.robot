@@ -23,6 +23,3 @@ Delete Request Demo
      should be equal    ${status_code}    200
 
 
-
-
-
